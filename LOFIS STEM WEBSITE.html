@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -67,9 +67,7 @@
             padding: 10px;
             background: #333;
             color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            margin-top: 20px;
         }
         .clock {
             text-align: right;
@@ -78,13 +76,58 @@
             font-size: 18px;
             color: black;
         }
-        #quiz-result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
     </style>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script>
+        // Login Functionality
+        function login() {
+            const schoolName = document.getElementById("schoolName").value.trim();
+            const studentName = document.getElementById("studentName").value.trim();
+
+            if (schoolName && studentName) {
+                document.getElementById("loginPage").classList.remove("active");
+                document.getElementById("mainContent").classList.add("active");
+                alert(`Welcome ${studentName} from ${schoolName}!`);
+                showClock();
+            } else {
+                alert("Please fill in both fields.");
+            }
+        }
+
+        // Clock Functionality
+        function showClock() {
+            function updateClock() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const date = now.toLocaleDateString('en-US', options);
+                const time = now.toLocaleTimeString('en-US');
+                document.getElementById("clock").textContent = `Date: ${date} | Time: ${time}`;
+            }
+            updateClock();
+            setInterval(updateClock, 1000); // Update every second
+        }
+
+        // Quiz Functionality
+        function checkAnswers() {
+            let score = 0;
+            const totalQuestions = 3;
+
+            const answers = {
+                q1: "A",
+                q2: "B",
+                q3: "B"
+            };
+
+            for (let question in answers) {
+                const userAnswer = document.querySelector(`input[name="${question}"]:checked`);
+                if (userAnswer && userAnswer.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            const result = document.getElementById("quiz-result");
+            result.textContent = `You scored ${score} out of ${totalQuestions}.`;
+        }
+    </script>
 </head>
 <body>
     <!-- Login Page -->
@@ -144,90 +187,41 @@
             <p>STEM education also promotes gender equality by encouraging more girls to explore and excel in science, technology, engineering, and mathematics.</p>
         </section>
 
-        <!-- Quiz Section -->
         <section id="quiz-section">
             <h2>Test Your STEM Knowledge!</h2>
             <p>Answer the questions below and see how much you know!</p>
+
+            <!-- Question 1 -->
             <div class="question">
                 <p><strong>1. What does STEM stand for?</strong></p>
                 <input type="radio" name="q1" value="A"> Science, Technology, Engineering, Mathematics<br>
                 <input type="radio" name="q1" value="B"> Sports, Technology, Education, Music<br>
                 <input type="radio" name="q1" value="C"> Science, Tools, Engineering, Machines<br>
             </div>
+
+            <!-- Question 2 -->
             <div class="question">
                 <p><strong>2. What is the boiling point of water?</strong></p>
                 <input type="radio" name="q2" value="A"> 50°C<br>
                 <input type="radio" name="q2" value="B"> 100°C<br>
                 <input type="radio" name="q2" value="C"> 150°C<br>
             </div>
+
+            <!-- Question 3 -->
             <div class="question">
                 <p><strong>3. Which planet is known as the Red Planet?</strong></p>
                 <input type="radio" name="q3" value="A"> Earth<br>
                 <input type="radio" name="q3" value="B"> Mars<br>
                 <input type="radio" name="q3" value="C"> Jupiter<br>
             </div>
+
             <button onclick="checkAnswers()">Submit Answers</button>
-            <p id="quiz-result"></p>
+            <p id="quiz-result" style="margin-top: 20px; font-weight: bold;"></p>
         </section>
+
         <footer>
             <p>© 2025 STEM Education | Empowering Future Innovators</p>
         </footer>
     </div>
-
-    <script>
-        // Login Functionality
-        function login() {
-            const schoolName = document.getElementById("schoolName").value.trim();
-            const studentName = document.getElementById("studentName").value.trim();
-
-            if (schoolName && studentName) {
-                document.getElementById("loginPage").classList.remove("active");
-                document.getElementById("mainContent").classList.add("active");
-                alert(`Welcome ${studentName} from ${schoolName}!`);
-                showClock();
-            } else {
-                alert("Please fill in both fields.");
-            }
-        }
-
-        // Clock Functionality
-        function showClock() {
-            function updateClock() {
-                const now = new Date();
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                const date = now.toLocaleDateString('en-US', options);
-                const time = now.toLocaleTimeString('en-US');
-                document.getElementById("clock").textContent = `Date: ${date} | Time: ${time}`;
-            }
-            updateClock();
-            setInterval(updateClock, 1000);
-        }
-
-        // Quiz Result Functionality
-        function checkAnswers() {
-            const answers = { q1: "A", q2: "B", q3: "B" };
-            let score = 0;
-            const totalQuestions = Object.keys(answers).length;
-
-            for (let question in answers) {
-                const selected = document.querySelector(`input[name="${question}"]:checked`);
-                if (selected && selected.value === answers[question]) {
-                    score++;
-                }
-            }
-
-            const resultElement = document.getElementById("quiz-result");
-            if (score === totalQuestions) {
-                resultElement.textContent = `Excellent! 🎉 You scored ${score} out of ${totalQuestions}. You know STEM very well!`;
-                resultElement.style.color = "green";
-            } else if (score >= totalQuestions / 2) {
-                resultElement.textContent = `Good job! 😊 You scored ${score} out of ${totalQuestions}. Keep learning!`;
-                resultElement.style.color = "orange";
-            } else {
-                resultElement.textContent = `You scored ${score} out of ${totalQuestions}. Don't worry, review the material and try again!`;
-                resultElement.style.color = "red";
-            }
-        }
-    </script>
 </body>
 </html>
