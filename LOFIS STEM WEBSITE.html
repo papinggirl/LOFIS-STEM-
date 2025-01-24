@@ -79,6 +79,8 @@
             color: black; /* Updated color for better visibility */
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 <body>
     <!-- Login Page -->
@@ -136,6 +138,38 @@
         <section id="other">
             <h2>Other Information</h2>
             <p>STEM education also promotes gender equality by encouraging more girls to explore and excel in science, technology, engineering, and mathematics.</p>
+        </section>
+
+        <section id="quiz-section">
+  <h2>Test Your STEM Knowledge!</h2>
+  <p>Answer the questions below and see how much you know!</p>
+
+  <!-- Question 1 -->
+  <div class="question">
+    <p><strong>1. What does STEM stand for?</strong></p>
+    <input type="radio" name="q1" value="A"> Science, Technology, Engineering, Mathematics<br>
+    <input type="radio" name="q1" value="B"> Sports, Technology, Education, Music<br>
+    <input type="radio" name="q1" value="C"> Science, Tools, Engineering, Machines<br>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question">
+    <p><strong>2. What is the boiling point of water?</strong></p>
+    <input type="radio" name="q2" value="A"> 50°C<br>
+    <input type="radio" name="q2" value="B"> 100°C<br>
+    <input type="radio" name="q2" value="C"> 150°C<br>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="question">
+    <p><strong>3. Which planet is known as the Red Planet?</strong></p>
+    <input type="radio" name="q3" value="A"> Earth<br>
+    <input type="radio" name="q3" value="B"> Mars<br>
+    <input type="radio" name="q3" value="C"> Jupiter<br>
+  </div>
+
+  <button onclick="checkAnswers()">Submit Answers</button>
+  <p id="quiz-result" style="margin-top: 20px; font-weight: bold;"></p>
         </section>
         <footer>
             <p>© 2025 STEM Education | Empowering Future Innovators</p>
