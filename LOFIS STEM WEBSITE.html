@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Login - STEM Education</title> 
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .login-page, .main-content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .login-page {
+            text-align: center;
+            padding: 50px;
+            background-color: #4CAF50;
+            color: white;
+            height: 100vh;
+        }
+        .login-page input {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 250px;
+        }
+        .login-page button {
+            padding: 10px 20px;
+            background-color: white;
+            color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        .clock {
+            text-align: right;
+            padding: 10px;
+            font-size: 18px;
+            color: black;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+    </style> 
+  <script>
+        // Login Functionality
+        function login() {
+            const schoolName = document.getElementById("schoolName").value.trim();
+            const studentName = document.getElementById("studentName").value.trim();
+
+            if (schoolName && studentName) {
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("mainContent").style.display = "block";
+                alert(`Welcome ${studentName} from ${schoolName}!`);
+                showClock();
+            } else {
+                alert("Please fill in both fields.");
+            }
+        }
+
+        // Clock Functionality
+        function showClock() {
+            function updateClock() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const date = now.toLocaleDateString('en-US', options);
+                const time = now.toLocaleTimeString('en-US');
+                document.getElementById("clock").textContent = `Date: ${date} | Time: ${time}`;
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+
+        // Quiz Functionality
+        function checkAnswers() {
+            let score = 0;
+            const totalQuestions = 3;
+
+            const answers = {
+                q1: "A",
+                q2: "B",
+                q3: "B"
+            };
+
+            for (let question in answers) {
+                const userAnswer = document.querySelector(`input[name="${question}"]:checked`);
+                if (userAnswer && userAnswer.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            const result = document.getElementById("quiz-result");
+            result.textContent = `You scored ${score} out of ${totalQuestions}.`;
+        }
+    </script> 
+ </head> 
+ <body> <!-- Login Page --> 
+  <div class="login-page active" id="loginPage"> 
+   <h1>Welcome Lotus STEM Student</h1> 
+   <h2>LOTUS FIELD INTERNATIONAL SCHOOL</h2> 
+   <p>Please enter your details to continue</p> 
+   <input type="text" id="schoolName" placeholder="Enter School Name" required> 
+   <input type="text" id="studentName" placeholder="Enter Student Name" required> 
+   <br> <button onclick="login()">Login</button> 
+  </div> <!-- Main Content --> 
+  <div class="main-content" id="mainContent"> 
+   <header> 
+    <h1>Welcome to STEM Education - LOTUS FIELD INTERNATIONAL SCHOOL</h1> 
+    <div class="clock" id="clock"></div> 
+   </header> 
+   <nav> <a href="#meaning">What is STEM?</a> <a href="#benefits">Benefits</a> <a href="#advantages">Advantages</a> <a href="#jobs">Job Opportunities</a> <a href="#other">Other Information</a> 
+   </nav> 
+   <section id="meaning"> 
+    <h2>What is STEM?</h2> 
+    <p>STEM stands for Science, Technology, Engineering, and Mathematics. It is an interdisciplinary approach to learning that integrates these four fields to prepare students for innovation, problem-solving, and critical thinking in the modern world.</p> 
+   </section> 
+   <section id="benefits"> 
+    <h2>Benefits of STEM</h2> 
+    <ul> 
+     <li>Enhances creativity and innovation.</li> 
+     <li>Improves problem-solving skills.</li> 
+     <li>Prepares students for the future workforce.</li> 
+     <li>Encourages teamwork and collaboration.</li> 
+    </ul> 
+   </section> 
+   <section id="advantages"> 
+    <h2>Advantages of STEM Education</h2> 
+    <p>STEM education provides hands-on learning experiences, fosters curiosity, and equips students with the skills they need to succeed in a technology-driven world.</p> 
+   </section> 
+   <section id="jobs"> 
+    <h2>Job Opportunities in STEM</h2> 
+    <p>Some popular careers in STEM include:</p> 
+    <ul> 
+     <li>Software Developer</li> 
+     <li>Engineer (Civil, Mechanical, Electrical, etc.)</li> 
+     <li>Data Scientist</li> 
+     <li>Research Scientist</li> 
+     <li>Robotics Specialist</li> 
+    </ul> 
+   </section> 
+   <section id="other"> 
+    <h2>Other Information</h2> 
+    <p>STEM education also promotes gender equality by encouraging more girls to explore and excel in science, technology, engineering, and mathematics.</p> 
+   </section> 
+   <section id="quiz-section"> 
+    <h2>Test Your STEM Knowledge!</h2> 
+    <p>Answer the questions below and see how much you know!</p> <!-- Question 1 --> 
+    <div class="question"> 
+     <p><strong>1. What does STEM stand for?</strong></p> 
+     <input type="radio" name="q1" value="A"> Science, Technology, Engineering, Mathematics 
+     <br> 
+     <input type="radio" name="q1" value="B"> Sports, Technology, Education, Music 
+     <br> 
+     <input type="radio" name="q1" value="C"> Science, Tools, Engineering, Machines 
+     <br> 
+    </div> <button onclick="checkAnswers()">Submit Answers</button> 
+    <p id="quiz-result" style="margin-top: 20px; font-weight: bold;"></p> 
+   </section> 
+   <footer> 
+    <p>© 2025 STEM Education | Empowering Future Innovators</p> 
+   </footer> 
+  </div> 
+ 
+</body></html>ngineer (Civil, Mechanical, Electrical, etc.)</li> 
+     <li>Data Scientist</li> 
+     <li>Research Scientist</li> 
+     <li>Robotics Specialist</li> 
+    </ul> 
+   </section> 
+   <section id="other"> 
+    <h2>Other Information</h2> 
+    <p>STEM education also promotes gender equality by encouraging more girls to explore and excel in science, technology, engineering, and mathematics.</p> 
+   </section> 
+   <section id="quiz-section"> 
+    <h2>Test Your STEM Knowledge!</h2> 
+    <p>Answer the questions below and see how much you know!</p> <!-- Question 1 --> 
+    <div class="question"> 
+     <p><strong>1. What does STEM stand for?</strong></p> 
+     <input type="radio" name="q1" value="A"> Science, Technology, Engineering, Mathematics 
+     <br> 
+     <input type="radio" name="q1" value="B"> Sports, Technology, Education, Music 
+     <br> 
+     <input type="radio" name="q1" value="C"> Science, Tools, Engineering, Machines 
+     <br> 
+    </div> <button onclick="checkAnswers()">Submit Answers</button> 
+    <p id="quiz-result" style="margin-top: 20px; font-weight: bold;"></p> 
+   </section> 
+   <footer> 
+    <p>© 2025 STEM Education | Empowering Future Innovators</p> 
+   </footer> 
+  </div> 
+ 
+<script type="text/javascript" id="dcoder_script">function checkAnswers() {
+  // Correct answers
+  const answers = {
+    q1: "A",
+    q2: "B",
+    q3: "B",
+  };
+
+  // Get user answers
+  let score = 0;
+  const totalQuestions = Object.keys(answers).length;
+  for (let question in answers) {
+    const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+    if (selectedOption && selectedOption.value === answers[question]) {
+      score++;
+    }
+  }
+
+  // Display result
+  const result = document.getElementById("quiz-result");
+  result.textContent = `You scored ${score} out of ${totalQuestions}!`;
+}</script></body></html>y></html>
